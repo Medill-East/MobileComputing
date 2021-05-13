@@ -1,0 +1,2 @@
+rootProject.name = "AndroidSensor"
+include ':app'
