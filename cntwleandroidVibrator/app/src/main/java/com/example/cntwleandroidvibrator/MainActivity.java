@@ -48,27 +48,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_hasVibrator:
-                Toast.makeText(mContext, myVibrator.hasVibrator() ? "当前设备有振动器" : "当前设备无振动器",
+                Toast.makeText(mContext, myVibrator.hasVibrator() ? "Vibrator Exist" : "Vibrator Not Exist",
                         Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_short:
                 myVibrator.cancel();
                 myVibrator.vibrate(new long[]{100, 200, 100, 200}, 0);
-                Toast.makeText(mContext, "短振动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "short vibration", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_long:
                 myVibrator.cancel();
                 myVibrator.vibrate(new long[]{100, 100, 100, 1000}, 0);
-                Toast.makeText(mContext, "长振动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "long vibration", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_rhythm:
                 myVibrator.cancel();
                 myVibrator.vibrate(new long[]{500, 100, 500, 100, 500, 100}, 0);
-                Toast.makeText(mContext, "节奏振动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "vibration in rhythm", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_cancle:
                 myVibrator.cancel();
-                Toast.makeText(mContext, "取消振动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "cancel vibration", Toast.LENGTH_SHORT).show();
         }
     }
 
