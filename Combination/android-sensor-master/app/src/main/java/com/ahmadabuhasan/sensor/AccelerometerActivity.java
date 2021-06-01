@@ -6,7 +6,9 @@ import android.app.Service;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +18,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.hardware.Sensor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.EventListener;
 import java.util.List;
 
@@ -28,6 +34,20 @@ public class AccelerometerActivity extends AppCompatActivity implements View.OnC
     TextView textView1 = null;
     SensorManager sm = null;
     List list;
+
+
+    //String message = editText.getText().toString();
+    File directory = getExternalFilesDir(null); //or getExternalFilesDir(null); for external storage
+    File file = new File(directory, "myfile.txt");
+        //System.out.println(directory);
+        //System.out.println("\n");
+
+    //FileOutputStream fos = null;
+    FileOutputStream stream = new FileOutputStream(file);
+
+
+
+
 
     SensorEventListener sel = new SensorEventListener() {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -42,8 +62,52 @@ public class AccelerometerActivity extends AppCompatActivity implements View.OnC
                 textView1.setText("x: " + values[0] + " m/s²\ny: " + values[1] + " m/s²\nz: " + values[2] + " m/s²");
                 getWindow().getDecorView().setBackgroundColor(Color.RED);
             }
+            try {
+                try {
+                    stream.write("text-to-write".getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+//            try {
+//                File sdCard = Environment.getExternalStorageDirectory();
+//                File dir = new File(sdCard.getAbsolutePath() + "/sean");
+//                Boolean dirsMade = dir.mkdir();
+//                //System.out.println(dirsMade);
+//                Log.v("Accel", dirsMade.toString());
+//
+//                File file = new File(dir, "output.csv");
+//                FileOutputStream f = new FileOutputStream(file, true);
+//                //f = new FileOutputStream(file);
+//
+//                String entry = values[0] + "," + values[1] + "," + values[2] + ",";
+//                try {
+//                    f.write(entry.getBytes());
+//                    f.flush();
+//                    f.close();
+//                    Toast.makeText(getBaseContext(), "Data saved", Toast.LENGTH_LONG).show();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+
         }
+
     };
+
+    public AccelerometerActivity() throws FileNotFoundException {
+    }
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
